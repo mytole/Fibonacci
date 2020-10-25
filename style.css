@@ -1,0 +1,41 @@
+body{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: normal;   
+    color: #373A3C; 
+}
+
+.row{
+    margin: auto;
+}
+
+.col{
+    padding: 0;
+}
+
+.content{
+    margin:0;
+    padding: 0;
+    position: relative;
+    top: 100px;
+    left: 164px;
+}
+
+h1{
+    font-size: 72px;
+    margin: 0;
+}
+
+.user-input{
+    margin-top: 57px;
+    padding-left: 5px;
+    font-size: 24px;
+}
+
+#num1{
+    margin: 0 10px;
+}
+
+#num2{
+    margin: 0 10px;
+}
