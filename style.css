@@ -39,3 +39,37 @@ h1{
 #num2{
     margin: 0 10px;
 }
+
+#userNum{
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+    width: 86px;
+    height: 38px;
+    margin: 0 14px;
+    padding: 0 15px;
+    padding-bottom: 7px;
+    font-size: 24px;
+    color: #373A3C;
+}
+
+::placeholder{
+    font-size: 16px;
+    color: #999999;
+    
+}
+
+#calcBtn {
+    background: #0275D8;
+    border: 1px solid #0275D8;
+}
+
+#answer {
+    align-items: flex-end;
+    text-decoration-line: underline;
+    font-size: 24px;
+    font-weight: bold;
+    color: #373A3C;
+    margin-left: 14px;
+
+}

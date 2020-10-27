@@ -1,30 +1,29 @@
-let fibIn = document.getElementById("num1");
-let ans = document.getElementById("num2");
 
+let calcBtn = document.getElementById("calcBtn");
+let answer = document.getElementById("answer");
 
-
-function fiboCalc(userNum){
-    if(userNum==0){
+function fiboCalc(userNum) {
+    if (userNum == 0) {
         return 0;
     }
-    if(userNum==1){
+    if (userNum == 1) {
         return 1;
     }
 
-    
     let fiboNumPriv2 = 0;
     let fiboNumPriv1 = 1;
     let fiboNumCurr = 1;
 
-    for(let fiboIndex = 1;fiboIndex<userNum; fiboIndex++){
-        fiboNumCurr = fiboNumPriv1 + fiboNumPriv2 ;
-        fiboNumPriv2 = fiboNumPriv1 ;
-        fiboNumPriv1 = fiboNumCurr ;
-        
+    for (let fiboIndex = 1; fiboIndex < userNum; fiboIndex++) {
+        fiboNumCurr = fiboNumPriv1 + fiboNumPriv2;
+        fiboNumPriv2 = fiboNumPriv1;
+        fiboNumPriv1 = fiboNumCurr;
     }
-
     return fiboNumCurr;
 }
 
-fibIn.innerText = "10";
-ans.innerText = fiboCalc(fibIn.innerText);
+calcBtn.addEventListener('click',()=>{
+    let userNum = document.getElementById("userNum").value;
+    let fiboCurr = fiboCalc(userNum);
+    answer.innerText = fiboCurr;
+})
