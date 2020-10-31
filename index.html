@@ -9,11 +9,11 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
+
 </head>
 
 <body>
-    
+
     <div class="container content">
         <div class="row header ">
             <h1>Fibonacci Calculator</h1>
@@ -23,25 +23,44 @@
             The Fibonnaci Of <input type="text" id="userNum" name="userNum" placeholder="#"> <button type="button"
                 class="btn btn-primary" id="calcBtn">Is </button>
             <div id="answer"></div>
-            <div id="loading">
+            <div id="loading-num">
                 <div class="spinner-border text-dark" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>
         <div class="row row-alert">
-            <div div  id="larger-50-alert" role="alert">
+            <div div id="larger-50-alert" role="alert">
                 Can’t be larger than 50
             </div>
+        </div>
+        <div class="row row-results-header">
+            <div class="col-11 results-h1">Results</div>
+            <div class="col results-spinner">
+                <div id="loading-res">
+                    <div class="spinner-border text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="row-results">
+
         </div>
     </div>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
 

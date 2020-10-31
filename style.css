@@ -19,6 +19,7 @@ body{
     position: relative;
     top: 100px;
     left: 164px;
+    
 }
 
 h1{
@@ -47,14 +48,17 @@ h1{
     width: 86px;
     height: 38px;
     margin: 0 14px;
-    padding: 0 15px;
-    padding-bottom: 7px;
+    text-align: left;
+    padding-bottom: 3px;
+    padding-left: 14px;
     font-size: 24px;
     color: #373A3C;
 }
 
 ::placeholder{
     font-size: 16px;
+    position: relative;
+    bottom: 2px;
     color: #999999;
     
 }
@@ -74,10 +78,19 @@ h1{
 
 }
 
-#loading {  
+#loading-num {  
     display: none;
     font-size: 18px;
     padding-top: 3px;
+}
+
+#loading-res {  
+    display: none;
+    font-size: 18px;
+    padding-top: 3px;
+    position: relative;
+    top: 23px;
+    left: 15px;
 }
 
 #larger-50-alert {
@@ -127,4 +140,30 @@ h1{
     align-items: flex-end;
     margin-left: 14px;
     padding-top: 6px;
+}
+
+.results-h1{
+    font-size: 54px;
+    line-height: 72px;
+    color: #373A3C;
+    padding-left: 0;
+    max-width: 182px;
+}
+
+.row-results-header{
+    position: absolute;
+    top: 240px;
+    
+}
+
+.result{
+    font-size: 24px;
+    color:  #373A3C;
+    border-bottom: 1px solid #000000;
+    padding: 18px 0;
+}
+
+#row-results{
+    position: relative;
+    top: 165px;
 }
