@@ -167,3 +167,57 @@ h1{
     position: relative;
     top: 165px;
 }
+
+#checkbox{
+    font-size: 16px;
+    color: #373A3C;   
+    display: flex;
+    flex-direction: row;
+}
+
+label[for=save]{
+    position: relative;
+    left: 12px;
+    bottom: 1px;
+    
+}
+
+input[type="checkbox"]{
+    position: relative;
+    left: 5px;
+    top: 5px;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    
+    
+}
+
+
+input[type="checkbox"]:after{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f00c";
+    font-size: 10px;
+    color: black;
+    display: none;
+}
+
+input[type="checkbox"]:hover{
+    background-color: #a5a5a5;
+}
+
+input[type="checkbox"]:checked:after{
+    display: inline-block;
+}
+
