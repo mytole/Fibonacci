@@ -14,7 +14,7 @@ function showAlert() {
     alert50.classList.add("fade-in");
 }
 
-function fiboCalc(userNum) {
+/* function fiboCalc(userNum) {
     if (userNum == 0) {
         return 0;
     }
@@ -32,6 +32,16 @@ function fiboCalc(userNum) {
         fiboNumPriv1 = fiboNumCurr;
     }
     return fiboNumCurr;
+} */
+
+function fiboCalc(userNum){
+    if(userNum==0){
+        return 0;
+    }
+    if(userNum==1){
+        return 1;
+    }
+    return (fiboCalc(userNum-1)+fiboCalc(userNum-2));
 }
 
 function serverCall() {
