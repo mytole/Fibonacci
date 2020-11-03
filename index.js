@@ -24,10 +24,15 @@ function fiboCalc(userNum) {
     return (fiboCalc(userNum - 1) + fiboCalc(userNum - 2));
 }
 
-async function serverCall() {
+async function serverCallRes() {
     const response = await fetch('http://localhost:5050/getFibonacciResults');
     const arrays = await response.json();
     return arrays;
+}
+
+async function serverCallSave(userInput){
+    const response = await fetch('http://localhost:5050/fibonacci/'+userInput);
+    return response;
 }
 
 function showServerArray(pro) {
@@ -77,7 +82,7 @@ calcBtn.addEventListener('click', () => {
     }
     else {
         if (saveBox.checked) {
-            fetch('http://localhost:5050/fibonacci/' + userInput).then(response => {
+            serverCallSave(userInput).then(response => {
                 if (!response.ok) {
                     hideSpinner(spinnerNum);
                     hideSpinner(spinnerRes);
@@ -93,7 +98,7 @@ calcBtn.addEventListener('click', () => {
                     response.json().then(data => {
                         hideSpinner(spinnerNum);
                         answer.innerHTML = data.result;
-                        showServerArray(serverCall());
+                        showServerArray(serverCallRes());
                     })
                 }
             })
