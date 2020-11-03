@@ -5,6 +5,7 @@ let spinnerRes = document.getElementById("loading-res");
 let alert50 = document.getElementById("larger-50-alert");
 let resultsRow = document.getElementById("row-results");
 let saveBox = document.getElementById("save");
+const sortBy = document.getElementById('sort-by');
 function showSpinner(spinner) { spinner.style.display = "inline-block"; };
 function hideSpinner(spinner) { spinner.style.display = "none"; };
 function hideaAlert() {
@@ -118,10 +119,15 @@ function printArr(arr) {
 }
 
 function showServerArray(pro) {
-    const sortBy = document.getElementById('sort-by');
+    
     pro.then((res => {
         hideSpinner(spinnerRes);
         let copyArr = [...res.results];
+        if (sortBy.value == "dat-asc") {
+            copyArr = sortArrayByDateAsc(copyArr);
+            $('.result').remove();
+            printArr(copyArr);
+        }
         sortBy.addEventListener("change", () => {
             if (sortBy.value == "dat-asc") {
                 copyArr = sortArrayByDateAsc(copyArr);
