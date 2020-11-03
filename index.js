@@ -14,47 +14,52 @@ function showAlert() {
     alert50.classList.add("fade-in");
 }
 
-function fiboCalc(userNum){
-    if(userNum==0){
+function fiboCalc(userNum) {
+    if (userNum == 0) {
         return 0;
     }
-    if(userNum==1){
+    if (userNum == 1) {
         return 1;
     }
-    return (fiboCalc(userNum-1)+fiboCalc(userNum-2));
+    return (fiboCalc(userNum - 1) + fiboCalc(userNum - 2));
 }
 
-function serverCall() {
-    fetch('http://localhost:5050/getFibonacciResults').then(response => {
+async function serverCall() {
+    const response = await fetch('http://localhost:5050/getFibonacciResults');
+    const arrays = await response.json();
+    return arrays;
+}
 
-        response.json().then(data => {
-            hideSpinner(spinnerRes);
-            let copyArr = [...data.results];
-            let sorted = true;
-            do {
-                sorted = true;
-                for (let i = 0; (i + 1) < copyArr.length; i++) {
-                    if (copyArr[i].createdDate < copyArr[i + 1].createdDate) {
-                        let temp = copyArr[i];
-                        copyArr[i] = copyArr[i + 1];
-                        copyArr[i + 1] = temp;
-                        sorted = false;
-                    }
+function showServerArray(pro) {
+    pro.then((res => {
+        hideSpinner(spinnerRes);
+        let copyArr = [...res.results];
+        let sorted = true;
+        do {
+            sorted = true;
+            for (let i = 0; (i + 1) < copyArr.length; i++) {
+                if (copyArr[i].createdDate < copyArr[i + 1].createdDate) {
+                    let temp = copyArr[i];
+                    copyArr[i] = copyArr[i + 1];
+                    copyArr[i + 1] = temp;
+                    sorted = false;
                 }
-            } while (!sorted)
-            $('.result').remove();
-            for (let i = 0; i < copyArr.length; i++) {
-                let resDate = new Date(copyArr[i].createdDate);
-                let currentCol = document.createElement("div");
-                currentCol.classList.add("col-12", "result");
-                resultsRow.appendChild(currentCol);
-                currentCol.innerHTML = "The Fibonnaci Of <b>" + copyArr[i].number + "</b> is <b>" + copyArr[i].result + "</b>. Calculated at: " + resDate;
-
             }
-        });
-    })
+        } while (!sorted)
+        $('.result').remove();
+        for (let i = 0; i < copyArr.length; i++) {
+            let resDate = new Date(copyArr[i].createdDate);
+            let currentCol = document.createElement("div");
+            currentCol.classList.add("col-12", "result");
+            resultsRow.appendChild(currentCol);
+            currentCol.innerHTML = "The Fibonnaci Of <b>" + copyArr[i].number + "</b> is <b>" + copyArr[i].result + "</b>. Calculated at: " + resDate;
 
+        }
+
+
+    }))
 }
+
 
 calcBtn.addEventListener('click', () => {
     let userInput = document.getElementById("userNum").value;
@@ -88,12 +93,12 @@ calcBtn.addEventListener('click', () => {
                     response.json().then(data => {
                         hideSpinner(spinnerNum);
                         answer.innerHTML = data.result;
-                        serverCall();
+                        showServerArray(serverCall());
                     })
                 }
             })
         }
-        else{
+        else {
             answer.innerText = fiboCalc(userInput);
             hideSpinner(spinnerNum);
             hideSpinner(spinnerRes);
