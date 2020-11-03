@@ -30,36 +30,122 @@ async function serverCallRes() {
     return arrays;
 }
 
-async function serverCallSave(userInput){
-    const response = await fetch('http://localhost:5050/fibonacci/'+userInput);
+async function serverCallSave(userInput) {
+    const response = await fetch('http://localhost:5050/fibonacci/' + userInput);
     return response;
 }
 
+function sortArrayByDateAsc(array) {
+    let copyArr = [...array];
+    let sorted = true;
+    do {
+        sorted = true;
+        for (let i = 0; (i + 1) < copyArr.length; i++) {
+            if (copyArr[i].createdDate < copyArr[i + 1].createdDate) {
+                let temp = copyArr[i];
+                copyArr[i] = copyArr[i + 1];
+                copyArr[i + 1] = temp;
+                sorted = false;
+            }
+        }
+    } while (!sorted)
+
+    return copyArr;
+}
+
+function sortArrayByDateDesc(array) {
+    let copyArr = [...array];
+    let sorted = true;
+    do {
+        sorted = true;
+        for (let i = 0; (i + 1) < copyArr.length; i++) {
+            if (copyArr[i].createdDate > copyArr[i + 1].createdDate) {
+                let temp = copyArr[i];
+                copyArr[i] = copyArr[i + 1];
+                copyArr[i + 1] = temp;
+                sorted = false;
+            }
+        }
+    } while (!sorted)
+
+    return copyArr;
+}
+
+function sortArrayByNumberAsc(array) {
+    let copyArr = [...array];
+    let sorted = true;
+    do {
+        sorted = true;
+        for (let i = 0; (i + 1) < copyArr.length; i++) {
+            if (copyArr[i].number < copyArr[i + 1].number) {
+                let temp = copyArr[i];
+                copyArr[i] = copyArr[i + 1];
+                copyArr[i + 1] = temp;
+                sorted = false;
+            }
+        }
+    } while (!sorted)
+
+    return copyArr;
+}
+
+function sortArrayByNumberDesc(array) {
+    let copyArr = [...array];
+    let sorted = true;
+    do {
+        sorted = true;
+        for (let i = 0; (i + 1) < copyArr.length; i++) {
+            if (copyArr[i].number > copyArr[i + 1].number) {
+                let temp = copyArr[i];
+                copyArr[i] = copyArr[i + 1];
+                copyArr[i + 1] = temp;
+                sorted = false;
+            }
+        }
+    } while (!sorted)
+
+    return copyArr;
+}
+
+function printArr(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let resDate = new Date(arr[i].createdDate);
+        let currentCol = document.createElement("div");
+        currentCol.classList.add("col-12", "result");
+        resultsRow.appendChild(currentCol);
+        currentCol.innerHTML = "The Fibonnaci Of <b>" + arr[i].number + "</b> is <b>" + arr[i].result + "</b>. Calculated at: " + resDate;
+    }
+}
+
 function showServerArray(pro) {
+    const sortBy = document.getElementById('sort-by');
     pro.then((res => {
         hideSpinner(spinnerRes);
         let copyArr = [...res.results];
-        let sorted = true;
-        do {
-            sorted = true;
-            for (let i = 0; (i + 1) < copyArr.length; i++) {
-                if (copyArr[i].createdDate < copyArr[i + 1].createdDate) {
-                    let temp = copyArr[i];
-                    copyArr[i] = copyArr[i + 1];
-                    copyArr[i + 1] = temp;
-                    sorted = false;
-                }
+        sortBy.addEventListener("change", () => {
+            if (sortBy.value == "dat-asc") {
+                copyArr = sortArrayByDateAsc(copyArr);
+                $('.result').remove();
+                printArr(copyArr);
             }
-        } while (!sorted)
-        $('.result').remove();
-        for (let i = 0; i < copyArr.length; i++) {
-            let resDate = new Date(copyArr[i].createdDate);
-            let currentCol = document.createElement("div");
-            currentCol.classList.add("col-12", "result");
-            resultsRow.appendChild(currentCol);
-            currentCol.innerHTML = "The Fibonnaci Of <b>" + copyArr[i].number + "</b> is <b>" + copyArr[i].result + "</b>. Calculated at: " + resDate;
+            if (sortBy.value == "dat-desc") {
+                copyArr = sortArrayByDateDesc(copyArr);
+                $('.result').remove();
+                printArr(copyArr);
+            }
+            if (sortBy.value == "num-asc") {
+                copyArr = sortArrayByNumberAsc(copyArr);
+                $('.result').remove();
+                printArr(copyArr);
+            }
+            if (sortBy.value == "num-desc") {
+                copyArr = sortArrayByNumberDesc(copyArr);
+                $('.result').remove();
+                printArr(copyArr);
+            }
+        });
 
-        }
+
 
 
     }))
