@@ -7,22 +7,25 @@ const vars = {
     resultsRow: document.getElementById("row-results"),
     saveBox: document.getElementById("save"),
     sortBy: document.getElementById('sort-by'),
-    showSpinner: function(spinner) { spinner.style.display = "inline-block"; },
-    hideSpinner: function(spinner) { spinner.style.display = "none"; },
+    showSpinner: function(spinner) {
+        spinner.classList.remove("hidespin");
+        spinner.classList.add("showspin"); 
+    },
+    hideSpinner: function(spinner) {
+        spinner.classList.remove("showspin");
+        spinner.classList.add("hidespin");
+     },
     hideaAlert: function(){vars.alert50.classList.remove("fade-in");},
     showAlert: function(){vars.alert50.classList.add("fade-in");},
     
 }
 
-
-
 function fiboCalc(userNum) {
     if (userNum == 0) {
         return 0;
     }
-    if (userNum == 1) {
-        return 1;
-    }
+    if (userNum == 1) return 1;
+        
     return (fiboCalc(userNum - 1) + fiboCalc(userNum - 2));
 }
 
@@ -122,7 +125,7 @@ function printArr(arr) {
 function showServerArray(pro) {
     
     pro.then((res => {
-        hideSpinner(vars.spinnerRes);
+        vars.hideSpinner(vars.spinnerRes);
         let copyArr = [...res.results];
         if (vars.sortBy.value == "dat-asc") {
             copyArr = sortArrayByDateAsc(copyArr);

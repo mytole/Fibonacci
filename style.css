@@ -5,6 +5,14 @@ body{
     color: #373A3C; 
 }
 
+.showspin{
+    visibility: visible!important;
+}
+
+.hidespin{
+    visibility: hidden!important;
+}
+
 .row{
     margin: auto;
 }
@@ -79,7 +87,7 @@ h1{
 }
 
 #loading-num {  
-    display: none;
+    visibility: hidden;
     font-size: 18px;
     padding-top: 3px;
 }
