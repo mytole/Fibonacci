@@ -1,19 +1,20 @@
-let calcBtn = document.getElementById("calcBtn");
-let answer = document.getElementById("answer");
-let spinnerNum = document.getElementById("loading-num");
-let spinnerRes = document.getElementById("loading-res");
-let alert50 = document.getElementById("larger-50-alert");
-let resultsRow = document.getElementById("row-results");
-let saveBox = document.getElementById("save");
-const sortBy = document.getElementById('sort-by');
-function showSpinner(spinner) { spinner.style.display = "inline-block"; };
-function hideSpinner(spinner) { spinner.style.display = "none"; };
-function hideaAlert() {
-    alert50.classList.remove("fade-in");
+const vars = {
+    calcBtn: document.getElementById("calcBtn"),
+    answer: document.getElementById("answer"),
+    spinnerNum: document.getElementById("loading-num"),
+    spinnerRes: document.getElementById("loading-res"),
+    alert50: document.getElementById("larger-50-alert"),
+    resultsRow: document.getElementById("row-results"),
+    saveBox: document.getElementById("save"),
+    sortBy: document.getElementById('sort-by'),
+    showSpinner: function(spinner) { spinner.style.display = "inline-block"; },
+    hideSpinner: function(spinner) { spinner.style.display = "none"; },
+    hideaAlert: function(){vars.alert50.classList.remove("fade-in");},
+    showAlert: function(){vars.alert50.classList.add("fade-in");},
+    
 }
-function showAlert() {
-    alert50.classList.add("fade-in");
-}
+
+
 
 function fiboCalc(userNum) {
     if (userNum == 0) {
@@ -113,7 +114,7 @@ function printArr(arr) {
         let resDate = new Date(arr[i].createdDate);
         let currentCol = document.createElement("div");
         currentCol.classList.add("col-12", "result");
-        resultsRow.appendChild(currentCol);
+        vars.resultsRow.appendChild(currentCol);
         currentCol.innerHTML = "The Fibonnaci Of <b>" + arr[i].number + "</b> is <b>" + arr[i].result + "</b>. Calculated at: " + resDate;
     }
 }
@@ -121,30 +122,30 @@ function printArr(arr) {
 function showServerArray(pro) {
     
     pro.then((res => {
-        hideSpinner(spinnerRes);
+        hideSpinner(vars.spinnerRes);
         let copyArr = [...res.results];
-        if (sortBy.value == "dat-asc") {
+        if (vars.sortBy.value == "dat-asc") {
             copyArr = sortArrayByDateAsc(copyArr);
             $('.result').remove();
             printArr(copyArr);
         }
-        sortBy.addEventListener("change", () => {
-            if (sortBy.value == "dat-asc") {
+        vars.sortBy.addEventListener("change", () => {
+            if (vars.sortBy.value == "dat-asc") {
                 copyArr = sortArrayByDateAsc(copyArr);
                 $('.result').remove();
                 printArr(copyArr);
             }
-            if (sortBy.value == "dat-desc") {
+            if (vars.sortBy.value == "dat-desc") {
                 copyArr = sortArrayByDateDesc(copyArr);
                 $('.result').remove();
                 printArr(copyArr);
             }
-            if (sortBy.value == "num-asc") {
+            if (vars.sortBy.value == "num-asc") {
                 copyArr = sortArrayByNumberAsc(copyArr);
                 $('.result').remove();
                 printArr(copyArr);
             }
-            if (sortBy.value == "num-desc") {
+            if (vars.sortBy.value == "num-desc") {
                 copyArr = sortArrayByNumberDesc(copyArr);
                 $('.result').remove();
                 printArr(copyArr);
@@ -158,47 +159,47 @@ function showServerArray(pro) {
 }
 
 
-calcBtn.addEventListener('click', () => {
+    vars.calcBtn.addEventListener('click', () => {
     let userInput = document.getElementById("userNum").value;
-    answer.id = "answer";
-    answer.innerHTML = "";
-    showSpinner(spinnerNum);
-    showSpinner(spinnerRes);
-    hideaAlert();
+    vars.answer.id = "answer";
+    vars.answer.innerHTML = "";
+    vars.showSpinner(vars.spinnerNum);
+    vars.showSpinner(vars.spinnerRes);
+    vars.hideaAlert();
 
     if (userInput > 50) {
-        hideSpinner(spinnerNum);
-        hideSpinner(spinnerRes);
-        showAlert();
+        vars.hideSpinner(vars.spinnerNum);
+        vars.hideSpinner(vars.spinnerRes);
+        vars.showAlert();
 
     }
     else {
-        if (saveBox.checked) {
+        if (vars.saveBox.checked) {
             serverCallSave(userInput).then(response => {
                 if (!response.ok) {
-                    hideSpinner(spinnerNum);
-                    hideSpinner(spinnerRes);
-                    answer.id = "server-err";
+                    vars.hideSpinner(vars.spinnerNum);
+                    vars.hideSpinner(vars.spinnerRes);
+                    vars.answer.id = "server-err";
 
                     response.text().then(data => {
-                        answer.innerHTML = "Server Error: " + data;
+                        vars.answer.innerHTML = "Server Error: " + data;
                     });
 
                 }
                 else {
 
                     response.json().then(data => {
-                        hideSpinner(spinnerNum);
-                        answer.innerHTML = data.result;
+                        vars.hideSpinner(vars.spinnerNum);
+                        vars.answer.innerHTML = data.result;
                         showServerArray(serverCallRes());
                     })
                 }
             })
         }
         else {
-            answer.innerText = fiboCalc(userInput);
-            hideSpinner(spinnerNum);
-            hideSpinner(spinnerRes);
+            vars.answer.innerText = fiboCalc(userInput);
+            vars.hideSpinner(vars.spinnerNum);
+            vars.hideSpinner(vars.spinnerRes);
         }
     }
 });
